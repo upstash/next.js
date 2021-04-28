@@ -14,7 +14,8 @@ import { writeConfigurationDefaults } from './typescript/writeConfigurationDefau
 export async function verifyTypeScriptSetup(
   dir: string,
   pagesDir: string,
-  typeCheckPreflight: boolean
+  typeCheckPreflight: boolean,
+  cacheDir?: string
 ): Promise<TypeCheckResult | boolean> {
   const tsConfigPath = path.join(dir, 'tsconfig.json')
 
@@ -44,7 +45,7 @@ export async function verifyTypeScriptSetup(
       const { runTypeCheck } = require('./typescript/runTypeCheck')
 
       // Verify the project passes type-checking before we go to webpack phase:
-      return await runTypeCheck(ts, dir, tsConfigPath)
+      return await runTypeCheck(ts, dir, tsConfigPath, cacheDir)
     }
     return true
   } catch (err) {
