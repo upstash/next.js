@@ -53,7 +53,15 @@ export function createPagesMapping(
 }
 
 export type WebpackEntrypoints = {
-  [bundle: string]: string | string[]
+  // for backward-compat
+  'main.js': string | string[]
+  [bundle: string]:
+    | string
+    | string[]
+    | {
+        import: string | string[]
+        dependOn: string | string[]
+      }
 }
 
 type Entrypoints = {
